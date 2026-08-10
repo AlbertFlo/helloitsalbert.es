@@ -9,7 +9,7 @@ export type Experience = {
 
 export const experiences: Experience[] = [
     {
-      period: "Feb 2023 — Oct 2025",
+      period: "Feb 2023 - Oct 2025",
       role: "Frontend Developer / UX-UI Specialist",
       company: "Visca Web — Barcelona, Spain",
       description:
@@ -18,7 +18,7 @@ export const experiences: Experience[] = [
       current: true,
     },
     {
-      period: "Feb 2020 — Feb 2023",
+      period: "Feb 2020 - Feb 2023",
       role: "Full Stack WordPress Developer",
       company: "Lime Advertising Inc. — Toronto, Canada",
       description:
@@ -27,7 +27,7 @@ export const experiences: Experience[] = [
       current: false,
     },
     {
-      period: "Aug 2018 — Feb 2020",
+      period: "Aug 2018 - Feb 2020",
       role: "Full Stack WordPress Developer",
       company: "Duplo Digital — Barcelona, Spain",
       description:
@@ -36,7 +36,7 @@ export const experiences: Experience[] = [
       current: false,
     },
     {
-      period: "Nov 2017 — Jul 2018",
+      period: "Nov 2017 - Jul 2018",
       role: "Front-End Developer",
       company: "Persuadis — Barcelona, Spain",
       description:

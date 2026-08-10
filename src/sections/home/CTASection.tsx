@@ -16,7 +16,7 @@ export default function CTASection(){
 						Let's Work Together
 					</h2>
 					<p className={`text-primary-foreground ${headerVisible ? "animate-fade-in animation-delay-200" : "opacity-0 transition-opacity duration-300"}`}>
-						Got a project in mind? I'd love to hear about it — whether it's a new idea or something that needs a fresh perspective.
+						Got a project in mind? I'd love to hear about it, whether it's a new idea or something that needs a fresh perspective.
 					</p>
 				</div>
                 

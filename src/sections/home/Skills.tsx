@@ -46,7 +46,7 @@ export default function Skills() {
                 </h2>
                 <p className="text-primary leading-relaxed">
                     Every tool in my stack earns its place. Performance, accessibility, and
-                    scalability aren't afterthoughts — they're built into the process from day one.
+                    scalability aren't afterthoughts. They're built into the process from day one.
                 </p>
             </div>
 

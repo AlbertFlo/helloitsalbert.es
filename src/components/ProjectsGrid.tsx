@@ -1,6 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation"
-import { ArrowUpRight, Github, ChevronRight } from "lucide-react";
-import { projects, type Project } from "@/data/projects";
+import { ArrowUpRight, Github, ChevronRight, Link2 } from "lucide-react";
+import { visibleProjects, type Project } from "@/data/projects";
 import { Link } from "react-router-dom";
 import ProjectCardImage from "@/components/ProjectCardImage";
 
@@ -12,8 +12,8 @@ export default function ProjectsGrid({ activeProject }: ProjectsGridProps) {
 
     const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation(0.05)
     const projectsToDisplay: Project[] = activeProject
-    ? projects.filter(p => p.slug !== activeProject.slug)
-    : projects;
+    ? visibleProjects.filter(p => p.slug !== activeProject.slug)
+    : visibleProjects;
     
     const gridColsClass = activeProject ? "xl:grid-cols-3" : "xl:grid-cols-4";
 
@@ -38,20 +38,33 @@ export default function ProjectsGrid({ activeProject }: ProjectsGridProps) {
                             alt={project.title}
                         >
                             <div className="absolute inset-0 bg-linear-to-t from-card via-card/50 to-transparent opacity-60" />
-                            {project.hasSubpage && (
+                            {(project.hasSubpage || project.externalUrl) && (
                                 <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <Link
-                                        to={projectRoute}
-                                        tabIndex={-1}
-                                        className="p-3 rounded-full bg-primary text-primary-foreground transition-all z-20"
-                                    >
-                                        <ArrowUpRight className="w-5 h-5" />
-                                    </Link>
+                                    {project.hasSubpage && (
+                                        <Link
+                                            to={projectRoute}
+                                            tabIndex={-1}
+                                            className="p-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/70 transition-all duration-300 z-20"
+                                        >
+                                            <ArrowUpRight className="w-5 h-5" />
+                                        </Link>
+                                    )}
+                                    {project.externalUrl && (
+                                        <a
+                                            href={project.externalUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            tabIndex={-1}
+                                            className="p-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/70 transition-all duration-300 z-20"
+                                        >
+                                            <Link2 className="w-5 h-5" />
+                                        </a>
+                                    )}
                                     {project.github && (
                                         <a
                                             href={project.github}
                                             aria-label={`View project on GitHub`}
-                                            className="p-3 rounded-full hover:bg-primary hover:text-primary-foreground transition-all z-20"
+                                            className="p-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/70 transition-all duration-300 z-20"
                                         >
                                             <Github className="w-5 h-5" />
                                         </a>
@@ -79,11 +92,27 @@ export default function ProjectsGrid({ activeProject }: ProjectsGridProps) {
                                 ))}
                             </div>
                             
-                            {project.hasSubpage && (
-                                <Link to={projectRoute} className="text-primary text-sm font-semibold group group-hover:text-primary transition-colors flex direction-row items-center gap-1">
-                                    View Project
-                                    <ChevronRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-all" />
-                                </Link>
+                            {(project.hasSubpage || project.externalUrl) && (
+                                <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                                    {project.hasSubpage && (
+                                        <Link to={projectRoute} className="text-primary text-sm font-semibold group group-hover:text-primary transition-colors flex direction-row items-center gap-1">
+                                            View Project
+                                            <ChevronRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-all" />
+                                        </Link>
+                                    )}
+                                    {project.externalUrl && (
+                                        <a
+                                            href={project.externalUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={`Visit the ${project.title} website`}
+                                            className="text-primary text-sm font-semibold group transition-colors flex direction-row items-center gap-1"
+                                        >
+                                            Visit Website
+                                            <Link2 className="w-4 h-4 text-primary group-hover:rotate-12 transition-all" />
+                                        </a>
+                                    )}
+                                </div>
                             )}
                         </div>
                     </div>

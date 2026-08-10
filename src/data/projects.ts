@@ -21,15 +21,50 @@ export type Project = {
   externalUrl?: string
   github?: string | null
   hasSubpage: boolean
+  hiddenFromGrid?: boolean
   sidebar: ProjectSidebarData
   details?: ProjectDetailsData
 }
 
 export const projects: Project[] = [
   {
+    slug: "watch-configurator",
+    title: "3D Watch Configurator",
+    summary:
+      "A self-initiated experiment in real-time 3D on the web: a scroll-driven landing page where a Blender-modelled watch can be customised live (finishes, dial textures and an animated exploded view) rendered with Three.js and React Three Fiber.",
+    thumbnail: "/mockup_watch_configurator.webp",
+    bannerImage: "/project-watch_configurator_banner.webp",
+    tags: ["Three.js", "React Three Fiber", "React", "TypeScript", "Zustand", "Tailwind CSS", "Motion", "Blender", "Vite"],
+    externalUrl: "https://watchconfigurator.netlify.app/",
+    github: null,
+    hasSubpage: true,
+    sidebar: {
+      type: "Personal Project, Real-Time 3D",
+      role: "Design & Development",
+      siteUrl: "https://watchconfigurator.netlify.app/",
+    },
+    details: {
+      overview: `
+This project started as a personal challenge: learn real-time 3D on the web properly, end to end, without a client brief or a template to lean on. The result is a scroll-driven product landing page built around a watch I modelled and textured myself in Blender.
+
+The watch is fully customisable in the browser: swap case finishes, change dial textures, and trigger an animated exploded view that separates the components in 3D space. Everything runs live in WebGL rather than as pre-rendered frames, so the configuration state and the camera are always in sync with what the user is doing.
+
+The frontend is React and TypeScript with React Three Fiber driving Three.js declaratively. Configuration state lives in Zustand so the 3D scene and the UI controls read from a single source of truth, and Motion handles the interface transitions that sit on top of the canvas. Vite keeps the build and the iteration loop fast, and Tailwind CSS covers the 2D layer.
+
+### What I owned
+- 3D modelling, materials, and export pipeline in Blender (glTF, draco-compressed)
+- Real-time scene setup: lighting, environment maps, and camera choreography
+- Scroll-driven storytelling synced to the 3D camera and model state
+- Live configurator logic: finishes, dial textures, and the exploded-view animation
+- UI design and implementation, plus state architecture with Zustand
+- Performance work: asset budgets, texture compression, and mobile fallbacks
+      `.trim(),
+    },
+  },
+  {
     slug: "personal-website",
     title: "Personal Website",
-    summary: "Designed and built from scratch — from concept and Figma design system through to a React/TypeScript frontend, with all visuals and assets created in-house.",
+    summary: "Designed and built from scratch, from concept and Figma design system through to a React/TypeScript frontend, with all visuals and assets created in-house.",
     thumbnail: "/mockup_personal_website.webp",
     bannerImage: "/project-personal_website_banner.webp",
     tags: ["React", "Tailwind CSS", "TypeScript", "Vite", "Figma", "Blender", "Affinity", "ComfyUI"],
@@ -41,11 +76,11 @@ export const projects: Project[] = [
     },
     details: {
       overview: `
-This site is the result of full end-to-end ownership — from the initial concept and Figma design system through to production deployment. Every decision, visual, and line of code is mine.
+This site is the result of full end-to-end ownership, from the initial concept and Figma design system through to production deployment. Every decision, visual, and line of code is mine.
 
 The design started in Figma, where I defined layout, typography, colour systems, and reusable components before writing any code. The frontend is built with React, TypeScript, and Tailwind CSS, using Vite for fast builds and GSAP for scroll-driven motion and interaction.
 
-To push the visual identity further, I created a custom 3D avatar — modelled and rigged in Blender, then animated through an AI-assisted pipeline using ComfyUI. This allows for a more distinctive and expressive experience than typical stock or static assets. Additional visuals were produced in Affinity Creative Suite.
+To push the visual identity further, I created a custom 3D avatar, modelled and rigged in Blender, then animated through an AI-assisted pipeline using ComfyUI. This allows for a more distinctive and expressive experience than typical stock or static assets. Additional visuals were produced in Affinity Creative Suite.
 
 ### What I owned
 - Product concept and information architecture
@@ -80,13 +115,13 @@ To push the visual identity further, I created a custom 3D avatar — modelled a
     },
     details: {
       overview: `
-  Tokize is a crypto reference platform designed to help both beginner and experienced investors navigate the digital asset space. The site centralises exchange reviews and comparisons, practical guides on wallets, staking, and DeFi, and live market data — all in one place.
+  Tokize is a crypto reference platform designed to help both beginner and experienced investors navigate the digital asset space. The site centralises exchange reviews and comparisons, practical guides on wallets, staking, and DeFi, and live market data, all in one place.
   
   The project was built at Visca Web on a fully custom WordPress theme, with a component-driven approach using custom Gutenberg blocks built from scratch. This gave the editorial team full flexibility to compose pages and content types.
   
   Live coin performance data is pulled via the CoinMarketCap API, surfacing real-time rankings, price movements, and market metrics directly within the site. This required careful integration work to keep data fresh, performant, and reliably rendered across different content contexts.
   
-  SEO was a core pillar of the build — structured around topic clusters, schema markup, and a content architecture designed to rank for high-intent crypto queries.
+  SEO was a core pillar of the build, structured around topic clusters, schema markup, and a content architecture designed to rank for high-intent crypto queries.
   
   ### What I owned
   - Custom WordPress theme development
@@ -110,6 +145,7 @@ To push the visual identity further, I created a custom 3D avatar — modelled a
     externalUrl: "https://www.terminix.ca/",
     github: null,
     hasSubpage: true,
+    hiddenFromGrid: true,
     sidebar: {
       type: "National Multi-Region Platform",
       role: "Frontend Developer",
@@ -146,16 +182,16 @@ The result was a cleaner architecture, faster content operations, and measurable
     github: null,
     hasSubpage: true,
     sidebar: {
-      type: "Franchise Platform — 40+ Sites",
+      type: "Franchise Platform, 40+ Sites",
       role: "Frontend Developer",
       company: "Merry Maids Canada",
       siteUrl: "https://www.merrymaids.ca/",
     },
     details: {
       overview: `
-  Merry Maids Canada is a nationwide network of home cleaning franchises operating across dozens of Canadian locations. Each franchise needed its own web presence — locally relevant, independently manageable, but visually consistent and on-brand.
+  Merry Maids Canada is a nationwide network of home cleaning franchises operating across dozens of Canadian locations. Each franchise needed its own web presence: locally relevant, independently manageable, but visually consistent and on-brand.
   
-  The starting point was a fragmented set of legacy sites built in a PHP library. The agency's strategy was to migrate all content into WordPress and rebuild the entire network around a single master template — reducing technical debt, unifying the brand experience, and making local SEO scalable.
+  The starting point was a fragmented set of legacy sites built in a PHP library. The agency's strategy was to migrate all content into WordPress and rebuild the entire network around a single master template, reducing technical debt, unifying the brand experience, and making local SEO scalable.
   
   I was responsible for building that master template from the ground up, as well as developing and customising each of the 40+ individual location sites. Every site shared the same architecture and design system, while allowing location-specific content, imagery, and SEO metadata to be managed independently by non-technical staff.
   
@@ -175,6 +211,8 @@ The result was a cleaner architecture, faster content operations, and measurable
     },
   },
 ]
+
+export const visibleProjects: Project[] = projects.filter((project) => !project.hiddenFromGrid)
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug)
