@@ -39,7 +39,7 @@ export default function Hero() {
 								Shipping<span className="text-secondary">.</span>
 							</h1>
 							<p className="text-md text-primary-foreground max-w-lg animate-fade-in animation-delay-200">
-								I build the web the way it should feel — fast, accessible, and
+								I build the web the way it should feel: fast, accessible, and
 								intentional. With 8+ years turning mockups into pixel-perfect,
 								performant frontends, I bridge the gap between design and
 								engineering across WordPress, React, and everything in between.

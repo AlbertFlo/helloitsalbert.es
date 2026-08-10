@@ -1,6 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation"
 import { ArrowUpRight, Github, ChevronRight } from "lucide-react";
-import { projects, type Project } from "@/data/projects";
+import { visibleProjects, type Project } from "@/data/projects";
 import { Link } from "react-router-dom";
 import ProjectCardImage from "@/components/ProjectCardImage";
 
@@ -12,8 +12,8 @@ export default function ProjectsGrid({ activeProject }: ProjectsGridProps) {
 
     const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation(0.05)
     const projectsToDisplay: Project[] = activeProject
-    ? projects.filter(p => p.slug !== activeProject.slug)
-    : projects;
+    ? visibleProjects.filter(p => p.slug !== activeProject.slug)
+    : visibleProjects;
     
     const gridColsClass = activeProject ? "xl:grid-cols-3" : "xl:grid-cols-4";
 

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import ProjectsGrid from './ProjectsGrid'
-import { projects } from '@/data/projects'
+import { visibleProjects } from '@/data/projects'
 
 vi.mock('@/hooks/useScrollAnimation', () => ({
     useScrollAnimation: () => ({ ref: { current: null }, isVisible: true }),
@@ -19,29 +19,29 @@ function renderGrid(props?: React.ComponentProps<typeof ProjectsGrid>) {
 describe('ProjectsGrid', () => {
     it('renders all projects when no activeProject is passed', () => {
         renderGrid()
-        projects.forEach((p) => {
+        visibleProjects.forEach((p) => {
             expect(screen.getByText(p.title)).toBeInTheDocument()
         })
     })
 
     it('excludes the activeProject from the grid', () => {
-        const excluded = projects[0]
+        const excluded = visibleProjects[0]
         renderGrid({ activeProject: excluded })
 
         expect(screen.queryByText(excluded.title)).not.toBeInTheDocument()
-        projects.slice(1).forEach((p) => {
+        visibleProjects.slice(1).forEach((p) => {
             expect(screen.getByText(p.title)).toBeInTheDocument()
         })
     })
 
     it('renders one fewer project card when activeProject is provided', () => {
         const { container: withActive } = renderGrid({
-            activeProject: projects[0],
+            activeProject: visibleProjects[0],
         })
         const { container: withoutActive } = renderGrid()
 
-        const countWith = withActive.querySelectorAll('img[alt]').length
-        const countWithout = withoutActive.querySelectorAll('img[alt]').length
+        const countWith = withActive.querySelectorAll('.animated-border-wrapper').length
+        const countWithout = withoutActive.querySelectorAll('.animated-border-wrapper').length
 
         expect(countWith).toBe(countWithout - 1)
     })
@@ -49,7 +49,7 @@ describe('ProjectsGrid', () => {
     it("renders 'View Project' links for projects that have a subpage", () => {
         renderGrid()
         const viewLinks = screen.getAllByText('View Project')
-        const subpageCount = projects.filter((p) => p.hasSubpage).length
+        const subpageCount = visibleProjects.filter((p) => p.hasSubpage).length
         expect(viewLinks).toHaveLength(subpageCount)
     })
 })
